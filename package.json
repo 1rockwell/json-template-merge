@@ -1,0 +1,30 @@
+{
+  "name": "json-template-merge",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nshak1r/json-template-merge.git"
+  },
+  "author": "Nic Shak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nshak1r/json-template-merge/issues"
+  },
+  "homepage": "https://github.com/nshak1r/json-template-merge#readme",
+  "bin": {
+    "json-template-merge": "bin/json-template-merge"
+  },
+  "devDependencies": {
+    "mocha": "^9.2.1",
+    "should": "^13.2.3"
+  },
+  "dependencies": {
+    "detect-indent": "^6.0.0",
+    "xdiff": "^0.2.11"
+  }
+}

@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+const jsonTemplateMerge = require('../lib/json-template-merge');
+
+let oursFileName = process.argv[2];
+let baseFileName = process.argv[3];
+let theirsFileName = process.argv[4];
+
+jsonTemplateMerge.mergeJsonTemplateFiles(oursFileName, baseFileName, theirsFileName);
