@@ -7,43 +7,17 @@ describe('JsonTemplateMerge', function() {
 
     describe('#merge3', function() {
 
-        let ours, theirs, base, expected;
+        let live, base, source, expected;
 
-        base = new JsonTemplate().addSection('base').addSection('common-1').addSection('common-2');
-        ours = new JsonTemplate(base).addSection('ours');
-        theirs = new JsonTemplate(base).addSectionWithSettings('theirs');
+        live = new JsonTemplate().addSection('common').addSectionWithSettings('live').addSection('deleteme');
+        base = new JsonTemplate().addSection('common').addSection('deleteme');
+        source = new JsonTemplate(base).addSection('source').removeSection('deleteme');
+
+        expected = new JsonTemplate().addSection('common').addSectionWithSettings('live').addSection('source');
         
-        expected = new JsonTemplate(base).addSection('ours').addSectionWithSettings('theirs');
-        
-        it('should add new sections', function() {
+        it('should merge json templates', function() {
 
-            let output = jsonTemplateMerge.merge3(ours.get(), base.get(), theirs.get());
-            output.should.be.eql(expected.get());
-        });
-
-        ours.removeSection('common-1');
-        theirs.removeSection('common-2');
-        expected.removeSection('common-1').removeSection('common-2');
-
-        it('should remove sections', function() {
-
-            let output = jsonTemplateMerge.merge3(ours.get(), base.get(), theirs.get());
-            output.should.be.eql(expected.get());
-        });
-
-        theirs.removeSection('common-1');
-
-        it('shouldn\'t remove already removed sections', function() {
-
-            let output = jsonTemplateMerge.merge3(ours.get(), base.get(), theirs.get());
-            output.should.be.eql(expected.get());
-        });
-
-        theirs.bringToFront('theirs');
-
-        it('should use order from ours', function() {
-
-            let output = jsonTemplateMerge.merge3(ours.get(), base.get(), theirs.get());
+            let output = jsonTemplateMerge.merge3(live.get(), base.get(), source.get());
             output.should.be.eql(expected.get());
         });
     });
